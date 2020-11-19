@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "angular-checkers"
+  "defaultProject": "angular-checkers",
+  "cli": {
+    "analytics": false
+  }
 }
