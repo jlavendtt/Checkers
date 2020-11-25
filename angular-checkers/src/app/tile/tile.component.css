@@ -1,0 +1,13 @@
+.light-tile {
+    background-color: white;
+}
+
+.dark-tile {
+    background-color: black;
+}
+
+div {
+    display: inline-block;
+    width: 12.5%;
+    height: 80px;
+}
