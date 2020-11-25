@@ -29,6 +29,8 @@ public class UserDetailImpl implements UserDetails {
         this.username = buildFrom.getUsername();
         this.email = buildFrom.getEmail();
 
+        this.password = buildFrom.getPassword();
+
         this.authorities = buildFrom.getRoles().stream()
                 .map( role -> new SimpleGrantedAuthority( role.getName().name() ))
                 .collect(Collectors.toList());
