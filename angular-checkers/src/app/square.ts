@@ -1,9 +1,11 @@
-import {Coord,TileColor} from "./boardEnums"
-import {Piece} from "./piece"
+import {Coord} from "./boardEnums"
 
-export interface Square {
-    curPiece?: Piece;
+export class Square {
     row: Coord;
     col: Coord;
-    tileColor: TileColor;
+
+    constructor(row: Coord, col: Coord) {
+        this.row = row
+        this.col = col;
+    }
 }

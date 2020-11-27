@@ -12,11 +12,15 @@ export class BlackPawn implements Piece {
         this.colorOfPiece = PieceColor.Black;
     }
 
-    potentialMoves(pos: Square): Move[] {
+    potentialMoves(pos: Square): Square[] {
 
+        let curx = pos.col;
+        let cury = pos.row;
+
+       
         
 
-        const toReturn: Move[] = [];
+        const toReturn: Square[] = [];
         return toReturn;
 
     }

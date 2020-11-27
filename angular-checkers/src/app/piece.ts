@@ -7,5 +7,5 @@ export interface Piece {
 
     typeOfPiece: PieceType;
     colorOfPiece: PieceColor;
-    potentialMoves(pos: Square): Move[];
+    potentialMoves(pos: Square): Square[];
 }

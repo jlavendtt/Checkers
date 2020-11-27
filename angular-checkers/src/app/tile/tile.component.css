@@ -11,3 +11,7 @@ div {
     width: 12.5%;
     height: 80px;
 }
+
+.selected {
+    background-color: blue;
+}

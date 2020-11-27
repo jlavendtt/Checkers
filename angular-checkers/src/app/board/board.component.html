@@ -1,6 +1,7 @@
 
 <div class="board" *ngFor="let row of board.rep">
-     <app-tile *ngFor ="let space of row"
+     <app-tile *ngFor ="let space of row" 
+     (click)="onSelect(space)"
      [tile]="space">
     </app-tile>
 </div>

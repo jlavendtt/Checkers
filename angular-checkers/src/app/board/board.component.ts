@@ -19,10 +19,20 @@ export class BoardComponent implements OnInit {
     rep: [[],[],[],[],[],[],[],[]]
   };
 
+  selectedTile: Tile;
+
   constructor() { }
 
   ngOnInit(): void {
     this.makeBoard();
+  }
+
+  onSelect(tile: Tile): void {
+    if (this.selectedTile) {
+      this.selectedTile.isSelected = false;
+    }
+    tile.isSelected = true;
+    this.selectedTile = tile;
   }
 
   makeBoard() {

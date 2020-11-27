@@ -11,23 +11,29 @@ import {PieceType, PieceColor, TileColor, Coord} from '../boardEnums';
 export class TileComponent implements OnInit {
 
   @Input() tile: Tile;
-  cssClass : string;
+  //private cssClass : string;
 
   constructor() { }
 
   ngOnInit(): void {
 
-    if (this.tile.tileColor==TileColor.White) {
-      this.cssClass = "light-tile";
-    }
-    else {
-      this.cssClass = "dark-tile";
-    }
+   
     
 
   }
   getCssClass(): string {
-    return this.cssClass;
+    if (this.tile.isSelected) {
+      return "selected";
+      
+    }
+
+    if (this.tile.tileColor==TileColor.White) {
+      return "light-tile";
+    }
+    else {
+      return "dark-tile";
+    }
+  
 
   }
  

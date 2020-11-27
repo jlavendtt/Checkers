@@ -12,11 +12,11 @@ export class BlackKing implements Piece {
         this.colorOfPiece = PieceColor.Black;
     }
 
-    potentialMoves(pos: Square): Move[] {
+    potentialMoves(pos: Square): Square[] {
 
         
 
-        const toReturn: Move[] = [];
+        const toReturn: Square[] = [];
         return toReturn;
 
     }

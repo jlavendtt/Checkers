@@ -12,11 +12,11 @@ export class redPawn implements Piece {
         this.colorOfPiece = PieceColor.Red;
     }
 
-    potentialMoves(pos: Square): Move[] {
+    potentialMoves(pos: Square): Square[] {
 
         
 
-        const toReturn: Move[] = [];
+        const toReturn: Square[] = [];
         return toReturn;
 
     }
