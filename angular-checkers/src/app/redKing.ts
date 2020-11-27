@@ -1,4 +1,4 @@
-import { PieceType, PieceColor, Coord } from './BoardEnums';
+import { PieceType, PieceColor, Coord } from './boardEnums';
 import { Move } from './move';
 import { Piece } from './piece';
 import { Square } from './square';

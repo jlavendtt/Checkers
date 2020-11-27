@@ -1,1 +1,15 @@
-<p>piece works!</p>
+<p *ngIf="tileRep.hasRedKing()">
+    Red King
+</p>
+<p *ngIf="tileRep.hasBlackPawn()">
+    Black Pawn
+</p>
+<p *ngIf="tileRep.hasBlackKing()">
+    Black King
+</p>
+<p *ngIf="tileRep.hasRedPawn()">
+    Red Pawn
+</p>
+<p *ngIf="tileRep.hasNothing()">
+ -
+</p>

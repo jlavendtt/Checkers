@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Piece } from '../piece';
+import { Tile } from '../tile';
 
 @Component({
   selector: 'app-piece',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./piece.component.css']
 })
 export class PieceComponent implements OnInit {
+
+  @Input() tileRep: Tile;
 
   constructor() { }
 
