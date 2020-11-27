@@ -1,3 +1,4 @@
+import { Board } from './board';
 import { PieceType, PieceColor, Coord } from './boardEnums';
 import { Move } from './move';
 import { Piece } from './piece';
@@ -12,7 +13,7 @@ export class BlackPawn implements Piece {
         this.colorOfPiece = PieceColor.Black;
     }
 
-    potentialMoves(pos: Square): Square[] {
+    potentialMoves(pos: Square, board: Board): Square[] {
 
         let curx = pos.col;
         let cury = pos.row;

@@ -7,6 +7,7 @@ import {BlackPawn} from '../blackPawn';
 import { RedKing } from '../redKing';
 import { redPawn } from '../redPawn';
 import { BlackKing } from '../blackKing';
+import { Square } from '../square';
 
 @Component({
   selector: 'app-board',
@@ -28,11 +29,15 @@ export class BoardComponent implements OnInit {
   }
 
   onSelect(tile: Tile): void {
+    if (tile.hasNothing()) return;
     if (this.selectedTile) {
       this.selectedTile.isSelected = false;
     }
     tile.isSelected = true;
     this.selectedTile = tile;
+    let pos = new Square(this.selectedTile.row as Coord, this.selectedTile.col as Coord);
+    let moves = this.selectedTile.curPiece.potentialMoves(pos,this.board);
+    console.log(moves);
   }
 
   makeBoard() {

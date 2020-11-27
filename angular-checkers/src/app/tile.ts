@@ -56,4 +56,15 @@ export class Tile  {
         return false
     }
 
+    hasRedPiece() : boolean {
+        if (!this.hasPiece()) return false;
+        if (this.hasRedKing() || this.hasRedPawn()) return true;
+        return false;
+    }
+    hasBlackPiece() : boolean {
+        if (!this.hasPiece()) return false;
+        if (this.hasBlackKing() || this.hasBlackPawn()) return true;
+        return false;
+    }
+
 }
