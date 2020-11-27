@@ -15,3 +15,7 @@ div {
 .selected {
     background-color: blue;
 }
+
+.available {
+    background-color: purple;
+}

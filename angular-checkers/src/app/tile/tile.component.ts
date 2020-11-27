@@ -27,6 +27,10 @@ export class TileComponent implements OnInit {
       
     }
 
+    if (this.tile.isAvailable) {
+      return "available";
+    }
+
     if (this.tile.tileColor==TileColor.White) {
       return "light-tile";
     }

@@ -37,7 +37,24 @@ export class BoardComponent implements OnInit {
     this.selectedTile = tile;
     let pos = new Square(this.selectedTile.row as Coord, this.selectedTile.col as Coord);
     let moves = this.selectedTile.curPiece.potentialMoves(pos,this.board);
-    console.log(moves);
+    this.makeUnavailable();
+    this.makeAvailable(moves);
+  }
+
+  makeUnavailable() : void {
+    for (let i = 0;i<8;++i) {
+      for (let j = 0;j<8;++j) {
+        this.board.rep[i][j].isAvailable = false;
+      }
+    }
+  }
+
+  makeAvailable(moves: Square[]) : void {
+    for (let i = 0;i<moves.length;++i) {
+      let row = moves[i].row;
+      let col = moves[i].col;
+      this.board.rep[row][col].isAvailable = true;
+    }
   }
 
   makeBoard() {

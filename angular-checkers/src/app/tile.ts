@@ -2,6 +2,7 @@ import {Coord, PieceColor, PieceType, TileColor} from "./boardEnums"
 import {Piece} from './piece';
 
 export class Tile  {
+    isAvailable: boolean
     isSelected: boolean
     curPiece?: Piece;
     tileColor: TileColor
@@ -13,6 +14,7 @@ export class Tile  {
         this.row = row;
         this.col = col;
         this.isSelected = false;
+        this.isAvailable = false;
     }
 
     hasPiece() : boolean {
