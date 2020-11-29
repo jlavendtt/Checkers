@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from  '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import {GameView} from './gameView';
+import { Play } from './play';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +33,11 @@ export class GameService {
     startGame(): Observable<GameView> {
       const url = `${this.gamessUrl}begin`;
       return this.http.post<GameView>(url,null,this.httpOptions);
+    }
+
+    makeMove(play : Play) : Observable<GameView> {
+      const url = `${this.gamessUrl}move`;
+      return this.http.post<GameView>(url,play,this.httpOptions);
     }
 
 

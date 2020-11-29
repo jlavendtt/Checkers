@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class GameServiceTest {
 
@@ -18,9 +17,17 @@ class GameServiceTest {
 //    @Test
 //    void startGame() {
 //    }
+//    @Test
+//    void getMoves() {
+//        List<Move> moves = service.getMoves(1);
+//        int i = 0;
+//    }
+
     @Test
-    void getMoves() {
-        List<Move> moves = service.getMoves(1);
+    void getGame() {
+        Game game = service.getGameById(3);
         int i = 0;
+
+
     }
 }

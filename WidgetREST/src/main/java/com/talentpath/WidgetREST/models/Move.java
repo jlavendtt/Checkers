@@ -1,10 +1,7 @@
 package com.talentpath.WidgetREST.models;
 
 
-import jdk.jfr.BooleanFlag;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -64,6 +61,22 @@ public class Move {
 
     public void setMoveNum(Integer moveNum) {
         this.moveNum = moveNum;
+    }
+
+    public Integer getEndPos() {
+        return endPos;
+    }
+
+    public void setEndPos(Integer endPos) {
+        this.endPos = endPos;
+    }
+
+    public boolean isTurnOver() {
+        return turnOver;
+    }
+
+    public void setTurnOver(boolean turnOver) {
+        this.turnOver = turnOver;
     }
 
     @Override

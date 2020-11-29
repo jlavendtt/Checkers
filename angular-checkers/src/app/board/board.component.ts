@@ -10,6 +10,7 @@ import { BlackKing } from '../blackKing';
 import { Square } from '../square';
 import { GameService } from '../game.service';
 import {GameView} from '../gameView';
+import {Play} from '../play';
 
 @Component({
   selector: 'app-board',
@@ -23,12 +24,21 @@ export class BoardComponent implements OnInit {
   };
 
   selectedTile: Tile;
+  gameNum: number;
+  redTurn: boolean;
+  moveid: number;
 
   constructor(private gameService : GameService) { }
 
   ngOnInit(): void {
+    this.moveid = 1;
+    this.redTurn = true;
     this.makeBoard();
-     this.gameService.startGame().subscribe(game => this.loadBoard(game));
+     this.gameService.startGame().subscribe(game =>   {
+       this.loadBoard(game);
+       this.gameNum = game.id;
+       }
+       );
   }
 
   loadBoard(gameView: GameView) : void {
@@ -57,19 +67,32 @@ export class BoardComponent implements OnInit {
   makeMove(tile: Tile): void {
       tile.curPiece = this.selectedTile.curPiece;
       this.selectedTile.curPiece = undefined;
-      let didJump;
+      let turnOver = true;
       let xdif = Math.abs(tile.row-this.selectedTile.row);
       let ydif = Math.abs(tile.col-this.selectedTile.col);
       if (xdif > 1 || ydif > 1) {
-          didJump = true;
+          turnOver = false;
           let xjump = (tile.row+this.selectedTile.row)/2;
           let yjump = (tile.col+this.selectedTile.col)/2;
           this.board.rep[xjump][yjump].curPiece = undefined;
-          return;
       }
+      let start = this.selectedTile.row*8 + this.selectedTile.col;
+      let end = tile.row*8 + tile.col;
+      let play : Play = {
+        gameNum: this.gameNum,
+        moveNum: this.moveid,
+        startPos: start,
+        endPos: end,
+        turnOver: turnOver
+      };
       this.selectedTile = null;
       this.makeUnavailable();
+      this.moveid++;
+      this.gameService.makeMove(play).subscribe(play => {
+        console.log(play);
 
+      });
+      
   }
 
   onSelect(tile: Tile): void {

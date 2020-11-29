@@ -2,6 +2,7 @@ package com.talentpath.WidgetREST.controllers;
 
 
 import com.talentpath.WidgetREST.ViewModels.GameView;
+import com.talentpath.WidgetREST.ViewModels.Play;
 import com.talentpath.WidgetREST.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +27,9 @@ public class GameController {
         list.add(new GameView(-1));
         return list;
     }
-    @PutMapping( "/move")
-    public GameView enterMove( @RequestBody GameView userMove)  {
-        return service.move();
+    @PostMapping( "move")
+    public GameView enterMove( @RequestBody Play userMove)  {
+        return service.move(userMove);
 
     }
 
