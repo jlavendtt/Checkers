@@ -24,13 +24,23 @@ export class redPawn implements Piece {
 
         if (x==0 && y ==1) {
             if (board.rep[y-1][x+1].hasNothing()) {
-                let temp = new Square(y-1 as Coord, x+1 as Coord)
+                let temp = new Square(y-1 as Coord, x+1 as Coord);
                 toReturn.push(temp);
             }
         }
         else if (x==7 && y ==1) {
             if (board.rep[y-1][x-1].hasNothing()) {
-                let temp = new Square(y-1 as Coord, x+1 as Coord)
+                let temp = new Square(y-1 as Coord, x+1 as Coord);
+                toReturn.push(temp);
+            }
+        }
+        else if (y==1) {
+            if (board.rep[y-1][x-1].hasNothing()) {
+                let temp = new Square(y-1 as Coord, x-1 as Coord);
+                toReturn.push(temp);
+            }
+            if (board.rep[y-1][x+1].hasNothing()) {
+                let temp = new Square(y-1 as Coord, x+1 as Coord);
                 toReturn.push(temp);
             }
         }

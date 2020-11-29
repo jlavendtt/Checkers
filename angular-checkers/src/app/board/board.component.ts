@@ -59,6 +59,9 @@ export class BoardComponent implements OnInit {
         if (letter === "R") {
           this.board.rep[i][j].curPiece = new RedKing;
         }
+        if (letter === "_") {
+          this.board.rep[i][j].curPiece = undefined;
+        }
       }
     }
 
@@ -66,12 +69,13 @@ export class BoardComponent implements OnInit {
 
   makeMove(tile: Tile): void {
       tile.curPiece = this.selectedTile.curPiece;
+      let pos = new Square(tile.row as Coord, tile.col as Coord);
       this.selectedTile.curPiece = undefined;
       let turnOver = true;
       let xdif = Math.abs(tile.row-this.selectedTile.row);
       let ydif = Math.abs(tile.col-this.selectedTile.col);
       if (xdif > 1 || ydif > 1) {
-          turnOver = false;
+          if (tile.curPiece.canJump(pos, this.board))turnOver = false;
           let xjump = (tile.row+this.selectedTile.row)/2;
           let yjump = (tile.col+this.selectedTile.col)/2;
           this.board.rep[xjump][yjump].curPiece = undefined;
@@ -89,13 +93,24 @@ export class BoardComponent implements OnInit {
       this.makeUnavailable();
       this.moveid++;
       this.gameService.makeMove(play).subscribe(play => {
-        console.log(play);
+        this.redTurn = play.redTurn;
+        this.loadBoard(play);
+        console.log(play.rep);
+        console.log(this.board.rep)
 
       });
+      if (turnOver) {
+        this.selectedTile = null;
+        this.makeUnavailable();
+      }
       
   }
 
   onSelect(tile: Tile): void {
+
+    if (tile.hasRedPiece() && !this.redTurn) return;
+
+    if (tile.hasBlackPiece() && this.redTurn) return;
     
     if (this.selectedTile) {
       this.selectedTile.isSelected = false;

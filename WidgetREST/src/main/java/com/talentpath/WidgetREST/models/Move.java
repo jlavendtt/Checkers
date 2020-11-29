@@ -7,16 +7,18 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table( name="moves")
-@IdClass(MoveId.class)
 public class Move {
 
 
     @Id
-    @ManyToOne
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    private Integer moveId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="game_num_id")
     private Game gameNum;
 
-    @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
+
     private Integer moveNum;
 
     @NotNull

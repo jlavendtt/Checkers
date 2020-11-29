@@ -44,14 +44,8 @@ public class GameService {
         move.setStartPos(usermove.getStartPos());
         move.setEndPos(usermove.getEndPos());
         move.setTurnOver(usermove.isTurnOver());
-        try {
-            moveDao.saveAndFlush(move);
-        } catch (Exception e) {
-            System.out.println("Hello");
-            System.out.println(e.getCause());
-            System.out.println(e.getMessage());
-        }
-        int i = 0;
+        moveDao.save(move);
+
 
     }
 
@@ -88,13 +82,7 @@ public class GameService {
     }
 
     public List<Move> getMoves(Integer id) {
-        Game game = getGameById(id);
-        List<MoveId> ids = new ArrayList<MoveId>();
-        for (int i = 0; i<500;++i) {
-            MoveId moveid = new MoveId(game,i);
-            ids.add(moveid);
-        }
-        List<Move> moves = moveDao.findAllById(ids);
+        List<Move> moves = moveDao.findByGameNumId(id);
         return moves;
     }
 }

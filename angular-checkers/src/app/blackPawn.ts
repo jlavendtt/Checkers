@@ -32,6 +32,16 @@ export class BlackPawn implements Piece {
                 toReturn.push(temp);
             }
         }
+        else if (y==6) {
+            if (board.rep[y+1][x+1].hasNothing()) {
+                let temp = new Square(y+1 as Coord, x+1 as Coord);
+                toReturn.push(temp);
+            }
+            if (board.rep[y+1][x-1].hasNothing()) {
+                let temp = new Square(y+1 as Coord, x-1 as Coord);
+
+            }
+        }
          else if (x==0) {
             if (board.rep[y+1][x+1].hasNothing()) {
                 let temp = new Square(y+1 as Coord, x+1 as Coord);
@@ -84,15 +94,15 @@ export class BlackPawn implements Piece {
         }
         else {
             if (board.rep[y+1][x+1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x-1 as Coord);
+                let temp = new Square(y+1 as Coord, x+1 as Coord);
                 toReturn.push(temp);
             }
             if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
                 let temp = new Square(y+2 as Coord, x-2 as Coord);
                 toReturn.push(temp);
             }
-            if (board.rep[y+1][x+1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x+1 as Coord);
+            if (board.rep[y+1][x-1].hasNothing()) {
+                let temp = new Square(y+1 as Coord, x-1 as Coord);
                 toReturn.push(temp);
             }
             if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {

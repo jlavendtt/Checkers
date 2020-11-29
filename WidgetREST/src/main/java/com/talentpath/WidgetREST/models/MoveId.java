@@ -1,20 +1,17 @@
 package com.talentpath.WidgetREST.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 public class MoveId implements Serializable {
 
-
-    private Game gameNum;
+    private Integer gameNumId;
     private Integer moveNum;
 
     public MoveId() {
     }
 
-    public MoveId(Game gameNum, Integer moveNum) {
-        this.gameNum = gameNum;
+    public MoveId(Integer gameNumId, Integer moveNum) {
+        this.gameNumId = gameNumId;
         this.moveNum = moveNum;
     }
 
@@ -25,23 +22,23 @@ public class MoveId implements Serializable {
 
         MoveId moveId = (MoveId) o;
 
-        if (gameNum != null ? !gameNum.equals(moveId.gameNum) : moveId.gameNum != null) return false;
+        if (gameNumId != null ? !gameNumId.equals(moveId.gameNumId) : moveId.gameNumId != null) return false;
         return moveNum != null ? moveNum.equals(moveId.moveNum) : moveId.moveNum == null;
     }
 
     @Override
     public int hashCode() {
-        int result = gameNum != null ? gameNum.hashCode() : 0;
+        int result = gameNumId != null ? gameNumId.hashCode() : 0;
         result = 31 * result + (moveNum != null ? moveNum.hashCode() : 0);
         return result;
     }
 
-    public Game getGameNum() {
-        return gameNum;
+    public Integer getGameNumId() {
+        return gameNumId;
     }
 
-    public void setGameNum(Game gameNum) {
-        this.gameNum = gameNum;
+    public void setGameNumId(Integer gameNumId) {
+        this.gameNumId = gameNumId;
     }
 
     public Integer getMoveNum() {
