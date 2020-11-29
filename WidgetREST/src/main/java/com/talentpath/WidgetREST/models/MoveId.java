@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class MoveId implements Serializable {
 
+
     private Game gameNum;
     private Integer moveNum;
 
