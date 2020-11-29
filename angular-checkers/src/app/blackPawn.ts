@@ -118,11 +118,22 @@ export class BlackPawn implements Piece {
         let x = pos.col;
         let y = pos.row;
 
-        
+        const toReturn: Square[] = [];
 
-        
-       
-          if (x==0) {
+        if (y==7) {
+            return false;
+        }
+
+        else if (x==0 && y ==6) {
+            return false;
+        }
+        else if (x==7 && y ==6) {
+            return false;
+        }
+        else if (y==6) {
+            return false;
+        }
+         else if (x==0) {
             
             if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
                 return true;
@@ -130,7 +141,7 @@ export class BlackPawn implements Piece {
             
         }
         else if (x==7) {
-            
+           
             if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
                 return true;
             }
@@ -139,9 +150,9 @@ export class BlackPawn implements Piece {
         else if (x==1) {
            
             if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
-               return true;
+                return true;
             }
-           
+            
         }
         else if (x==6) {
             
@@ -160,9 +171,31 @@ export class BlackPawn implements Piece {
                 return true;
             }
         }
-    
-    
         return false;
+    }
+
+    potentialJumps(pos: Square, board: Board): Square[] {
+        const toReturn: Square[] = [];
+
+        let x = pos.col;
+        let y = pos.row;
+        //jump down right 
+        if ( (x+2) <8 && (y+2) <8) {
+            if (board.rep[y+2][x+2].hasNothing() && board.rep[y+1][x+1].hasRedPiece()) {
+                let temp = new Square(y+2 as Coord, x+2 as Coord);
+                toReturn.push(temp);
+            }
+        }
+        //jump down left
+        if ( (x-2)>=0 && (y+2) <8) {
+            if (board.rep[y+2][x-2].hasNothing() && board.rep[y+1][x-1].hasRedPiece()) {
+                let temp = new Square(y+2 as Coord, x-2 as Coord);
+                toReturn.push(temp);
+            }
+        }
+        
+
+        return toReturn;
     }
 
 

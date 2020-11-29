@@ -10,4 +10,5 @@ export interface Piece {
     colorOfPiece: PieceColor;
     potentialMoves(pos: Square, board: Board): Square[];
     canJump(pos: Square, board: Board): boolean;
+    potentialJumps(pos: Square, board: Board): Square[];
 }

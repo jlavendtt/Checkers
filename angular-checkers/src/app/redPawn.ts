@@ -17,9 +17,6 @@ export class redPawn implements Piece {
 
         let x = pos.col;
         let y = pos.row;
-        console.log("x is " + x);
-        console.log("y is " + y);
-
         const toReturn: Square[] = [];
 
         if (x==0 && y ==1) {
@@ -120,8 +117,22 @@ export class redPawn implements Piece {
         let x = pos.col;
         let y = pos.row;
 
-         if (x==0) {
-            
+        if (y==0) {
+            return false;
+        }
+
+        else if (x==0 && y ==1) {
+            if (board.rep[y-1][x+1].hasNothing()) {
+                return false;
+            }
+        }
+        else if (x==7 && y ==1) {
+            return false;
+        }
+        else if (y==1) {
+            return false;
+        }
+         else if (x==0) {
             
             if (board.rep[y-1][x+1].hasBlackPiece() && board.rep[y-2][x+2].hasNothing()) {
                 return true;
@@ -136,7 +147,7 @@ export class redPawn implements Piece {
         }
 
         else if (x==1) {
-           
+            
             if (board.rep[y-1][x+1].hasBlackPiece() && board.rep[y-2][x+2].hasNothing()) {
                 return true;
             }
@@ -152,18 +163,41 @@ export class redPawn implements Piece {
         else {
             
             if (board.rep[y-1][x-1].hasBlackPiece() && board.rep[y-2][x-2].hasNothing()) {
-                let temp = new Square(y-2 as Coord, x-2 as Coord);
                 return true;
             }
-            
+           
             if (board.rep[y-1][x+1].hasBlackPiece() && board.rep[y-2][x+2].hasNothing()) {
-                let temp = new Square(y-2 as Coord, x+2 as Coord);
                 return true;
             }
         }
         
         return false;
     }
+
+    potentialJumps(pos: Square, board: Board): Square[] {
+        const toReturn: Square[] = [];
+
+        let x = pos.col;
+        let y = pos.row;
+        //jump up right 
+        if ((x+2)<8 && (y-2) >=0) {
+            if (board.rep[y-2][x+2].hasNothing() && board.rep[y-1][x+1].hasBlackPiece()) {
+                let temp = new Square(y-2 as Coord, x+2 as Coord);
+                toReturn.push(temp);
+            }
+        }
+        //jump down left
+        if ((x-2)>=0 && (y-2)<=0) {
+            if (board.rep[y-2][x-2].hasNothing() && board.rep[y-1][x-1].hasBlackPiece()) {
+                let temp = new Square(y-2 as Coord, x-2 as Coord);
+                toReturn.push(temp);
+            }
+        }
+        
+
+        return toReturn;
+    }
+
 }
 
     

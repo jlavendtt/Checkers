@@ -27,10 +27,12 @@ export class BoardComponent implements OnInit {
   gameNum: number;
   redTurn: boolean;
   moveid: number;
+  mustCapture: boolean;
 
   constructor(private gameService : GameService) { }
 
   ngOnInit(): void {
+    this.mustCapture = false;
     this.moveid = 1;
     this.redTurn = true;
     this.makeBoard();
@@ -67,7 +69,7 @@ export class BoardComponent implements OnInit {
 
   }
 
-  makeMove(tile: Tile): void {
+  makeMove(tile: Tile): boolean {
       tile.curPiece = this.selectedTile.curPiece;
       let pos = new Square(tile.row as Coord, tile.col as Coord);
       this.selectedTile.curPiece = undefined;
@@ -75,10 +77,16 @@ export class BoardComponent implements OnInit {
       let xdif = Math.abs(tile.row-this.selectedTile.row);
       let ydif = Math.abs(tile.col-this.selectedTile.col);
       if (xdif > 1 || ydif > 1) {
-          if (tile.curPiece.canJump(pos, this.board))turnOver = false;
-          let xjump = (tile.row+this.selectedTile.row)/2;
+        let xjump = (tile.row+this.selectedTile.row)/2;
           let yjump = (tile.col+this.selectedTile.col)/2;
           this.board.rep[xjump][yjump].curPiece = undefined;
+          if (tile.curPiece.canJump(pos, this.board)) {
+            turnOver = false;
+            this.mustCapture = true;
+            this.makeUnavailable();
+            this.makeAvailable(tile.curPiece.potentialJumps(pos,this.board));
+          }
+          
       }
       let start = this.selectedTile.row*8 + this.selectedTile.col;
       let end = tile.row*8 + tile.col;
@@ -89,8 +97,7 @@ export class BoardComponent implements OnInit {
         endPos: end,
         turnOver: turnOver
       };
-      this.selectedTile = null;
-      this.makeUnavailable();
+      if (turnOver) this.makeUnavailable();
       this.moveid++;
       this.gameService.makeMove(play).subscribe(play => {
         this.redTurn = play.redTurn;
@@ -99,14 +106,18 @@ export class BoardComponent implements OnInit {
         console.log(this.board.rep)
 
       });
-      if (turnOver) {
-        this.selectedTile = null;
-        this.makeUnavailable();
-      }
+      if (!turnOver) this.selectedTile = tile;
+      return turnOver;
       
   }
 
   onSelect(tile: Tile): void {
+
+    if (this.mustCapture && !tile.isAvailable) {
+      let i = 0;
+      return;
+    }
+    this.mustCapture = false;
 
     if (tile.hasRedPiece() && !this.redTurn) return;
 
@@ -116,7 +127,8 @@ export class BoardComponent implements OnInit {
       this.selectedTile.isSelected = false;
     }
     if (tile.isAvailable) {
-      this.makeMove(tile);
+      let over =this.makeMove(tile);
+      return;
 
     }
     if (tile.hasNothing()) return;
