@@ -1,5 +1,7 @@
 package com.talentpath.WidgetREST.models;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 public class MoveId implements Serializable {

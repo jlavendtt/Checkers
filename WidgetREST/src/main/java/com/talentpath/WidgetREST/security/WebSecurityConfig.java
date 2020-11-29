@@ -72,6 +72,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( HttpMethod.POST, "/api/auth/signin").permitAll()
                 .antMatchers( HttpMethod.POST, "/api/auth/signup").permitAll()
 
+                .antMatchers( HttpMethod.POST, "/api/games/begin").permitAll()
+                .antMatchers( HttpMethod.GET, "/api/games/").permitAll()
+
 
                 .anyRequest().authenticated();
 

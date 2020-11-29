@@ -8,6 +8,8 @@ import { RedKing } from '../redKing';
 import { redPawn } from '../redPawn';
 import { BlackKing } from '../blackKing';
 import { Square } from '../square';
+import { GameService } from '../game.service';
+import {GameView} from '../gameView';
 
 @Component({
   selector: 'app-board',
@@ -22,17 +24,64 @@ export class BoardComponent implements OnInit {
 
   selectedTile: Tile;
 
-  constructor() { }
+  constructor(private gameService : GameService) { }
 
   ngOnInit(): void {
     this.makeBoard();
+     this.gameService.startGame().subscribe(game => this.loadBoard(game));
+  }
+
+  loadBoard(gameView: GameView) : void {
+
+    let map = gameView.rep;
+    for (let i = 0;i<8;++i) {
+      for (let j = 0;j<8;++j) {
+        let letter = map[i][j];
+        if (letter==="b") {
+          this.board.rep[i][j].curPiece = new BlackPawn;
+        }
+        if (letter === "B") {
+          this.board.rep[i][j].curPiece = new BlackKing;
+        }
+        if (letter === "r") {
+          this.board.rep[i][j].curPiece = new redPawn;
+        }
+        if (letter === "R") {
+          this.board.rep[i][j].curPiece = new RedKing;
+        }
+      }
+    }
+
+  }
+
+  makeMove(tile: Tile): void {
+      tile.curPiece = this.selectedTile.curPiece;
+      this.selectedTile.curPiece = undefined;
+      let didJump;
+      let xdif = Math.abs(tile.row-this.selectedTile.row);
+      let ydif = Math.abs(tile.col-this.selectedTile.col);
+      if (xdif > 1 || ydif > 1) {
+          didJump = true;
+          let xjump = (tile.row+this.selectedTile.row)/2;
+          let yjump = (tile.col+this.selectedTile.col)/2;
+          this.board.rep[xjump][yjump].curPiece = undefined;
+          return;
+      }
+      this.selectedTile = null;
+      this.makeUnavailable();
+
   }
 
   onSelect(tile: Tile): void {
-    if (tile.hasNothing()) return;
+    
     if (this.selectedTile) {
       this.selectedTile.isSelected = false;
     }
+    if (tile.isAvailable) {
+      this.makeMove(tile);
+
+    }
+    if (tile.hasNothing()) return;
     tile.isSelected = true;
     this.selectedTile = tile;
     let pos = new Square(this.selectedTile.row as Coord, this.selectedTile.col as Coord);
@@ -74,38 +123,6 @@ export class BoardComponent implements OnInit {
          white = !white;
         this.board.rep[i][j] = temp;
       }
+     }
     }
-    for (let i = 1; i <8 ; i+=2 ) {
-      let bp = new BlackPawn;
-      this.board.rep[0][i].curPiece = bp;
-    }
-
-    for (let i = 0; i <8 ; i+=2 ) {
-      let bp = new BlackPawn;
-      this.board.rep[1][i].curPiece = bp;
-    }
-
-    for (let i = 1; i <8 ; i+=2 ) {
-      let bp = new BlackPawn;
-      this.board.rep[2][i].curPiece = bp;
-    }
-
-    for (let i = 0; i <8 ; i+=2 ) {
-      let bp = new redPawn;
-      this.board.rep[7][i].curPiece = bp;
-    }
-
-    for (let i = 1; i <8 ; i+=2 ) {
-      let bp = new redPawn;
-      this.board.rep[6][i].curPiece = bp;
-    }
-
-    for (let i = 0; i <8 ; i+=2 ) {
-      let bp = new redPawn;
-      this.board.rep[5][i].curPiece = bp;
-    }
-
-    
-   
-  }
 }

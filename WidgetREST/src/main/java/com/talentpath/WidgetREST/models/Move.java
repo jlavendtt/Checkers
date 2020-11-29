@@ -1,6 +1,8 @@
 package com.talentpath.WidgetREST.models;
 
 
+import jdk.jfr.BooleanFlag;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -23,6 +25,12 @@ public class Move {
     @NotNull
     @Size(max = 120)
     private Integer startPos;
+
+    @NotNull
+    @Size(max = 120)
+    private Integer endPos;
+
+    private boolean turnOver;
 
 
     public Move() {

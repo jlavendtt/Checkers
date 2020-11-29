@@ -1,5 +1,7 @@
 package com.talentpath.WidgetREST.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class Game {
 
     @ManyToOne
     private User player2;
+
 
     public Game() {
     }

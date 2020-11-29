@@ -105,5 +105,55 @@ export class redPawn implements Piece {
         return toReturn;
 
     }
+    canJump(pos: Square, board: Board): boolean {
 
+        let x = pos.col;
+        let y = pos.row;
+
+         if (x==0) {
+            
+            
+            if (board.rep[y-1][x+1].hasBlackPiece() && board.rep[y-2][x+2].hasNothing()) {
+                return true;
+            }
+            
+        }
+        else if (x==7) {
+           
+            if (board.rep[y-1][x-1].hasBlackPiece() && board.rep[y-2][x-2].hasNothing()) {
+                return true;
+            }
+        }
+
+        else if (x==1) {
+           
+            if (board.rep[y-1][x+1].hasBlackPiece() && board.rep[y-2][x+2].hasNothing()) {
+                return true;
+            }
+            
+        }
+        else if (x==6) {
+            
+            if (board.rep[y-1][x-1].hasBlackPiece() && board.rep[y-2][x-2].hasNothing()) {
+                return true;
+            }
+           
+        }
+        else {
+            
+            if (board.rep[y-1][x-1].hasBlackPiece() && board.rep[y-2][x-2].hasNothing()) {
+                let temp = new Square(y-2 as Coord, x-2 as Coord);
+                return true;
+            }
+            
+            if (board.rep[y-1][x+1].hasBlackPiece() && board.rep[y-2][x+2].hasNothing()) {
+                let temp = new Square(y-2 as Coord, x+2 as Coord);
+                return true;
+            }
+        }
+        
+        return false;
     }
+}
+
+    

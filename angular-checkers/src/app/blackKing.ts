@@ -185,5 +185,98 @@ export class BlackKing implements Piece {
 
 
     }
+    canJump(pos: Square, board: Board): boolean {
+
+        let x = pos.col;
+        let y = pos.row;
+        //red Pawns moves
+       
+        
+         if (x==0) {
+            
+            if (board.rep[y-1][x+1].hasRedPiece() && board.rep[y-2][x+2].hasNothing()) {
+                return true;
+            }
+            
+        }
+        else if (x==7) {
+            
+            if (board.rep[y-1][x-1].hasRedPiece() && board.rep[y-2][x-2].hasNothing()) {
+                return true;
+            }
+        }
+
+        else if (x==1) {
+            
+            if (board.rep[y-1][x+1].hasRedPiece() && board.rep[y-2][x+2].hasNothing()) {
+                return true;
+            }
+            
+        }
+        else if (x==6) {
+            
+            if (board.rep[y-1][x-1].hasRedPiece() && board.rep[y-2][x-2].hasNothing()) {
+                return true;
+            }
+            
+        }
+        else {
+            
+            if (board.rep[y-1][x-1].hasRedPiece() && board.rep[y-2][x-2].hasNothing()) {
+                return true;
+            }
+            
+            if (board.rep[y-1][x+1].hasRedPiece() && board.rep[y-2][x+2].hasNothing()) {
+                return true;
+            }
+        }
+
+        //Black Pawns moves
+       
+        
+          if (x==0) {
+            
+            if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
+                return true;
+            }
+            
+        }
+        else if (x==7) {
+            
+            if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
+                return true;
+            }
+        }
+
+        else if (x==1) {
+            
+            if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
+                let temp = new Square(y+2 as Coord, x+2 as Coord);
+                return true;
+            }
+           
+        }
+        else if (x==6) {
+            
+            if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
+                return true;
+            }
+            
+        }
+        else {
+            
+            if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
+                return true;
+            }
+            
+            if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
+                return true;
+            }
+        }
+
+
+        return false;
+
+    }
 
     }
