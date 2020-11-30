@@ -2,8 +2,9 @@
 style="color:red;">
     Red King
 </div>
-<div *ngIf="tileRep.hasBlackPawn()">
-    Black Pawn
+<div class = "middle"
+*ngIf="tileRep.hasBlackPawn()">
+    <span class="dot"></span>
 </div>
 <div *ngIf="tileRep.hasBlackKing()">
     Black King
@@ -12,6 +13,7 @@ style="color:red;">
 style="color:red;">
     Red Pawn
 </div>
-<div *ngIf="tileRep.hasNothing()">
- -
+<div style="color:white"
+*ngIf="tileRep.hasNothing()">
+ 
 </div>

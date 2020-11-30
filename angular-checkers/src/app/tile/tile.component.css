@@ -1,5 +1,7 @@
 .light-tile {
     background-color: white;
+    
+      
 }
 
 .dark-tile {
@@ -7,9 +9,13 @@
 }
 
 div {
-    display: inline-block;
-    width: 12.5%;
-    height: 80px;
+  display: flex;
+  width: 12.25vw;
+  height: 88px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    
 }
 
 .selected {
@@ -22,4 +28,11 @@ div {
 
 .turn {
     background-color: lightyellow;
+}
+
+.middle {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
