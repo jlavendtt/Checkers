@@ -85,4 +85,13 @@ public class GameService {
         List<Move> moves = moveDao.findByGameNumId(id);
         return moves;
     }
+
+    public List<GameView> getAllGames() {
+        List<GameView> list = new ArrayList<GameView>();
+        List<Game> games = gameDao.findAll();
+        for (int i = 0;i<games.size();++i) {
+            list.add(new GameView(games.get(i).getId()));
+        }
+        return list;
+    }
 }

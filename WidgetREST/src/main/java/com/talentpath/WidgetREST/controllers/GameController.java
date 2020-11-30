@@ -23,14 +23,20 @@ public class GameController {
 
     @GetMapping("")
     public List<GameView> getAllGames() {
-        List<GameView> list = new ArrayList<GameView>();
-        list.add(new GameView(-1));
-        return list;
+        return service.getAllGames();
     }
     @PostMapping( "move")
     public GameView enterMove( @RequestBody Play userMove)  {
         return service.move(userMove);
 
+    }
+
+    @GetMapping("/moves/{gameId}")
+    public List<Play> getGame(@PathVariable Integer gameId)  {
+        List<Play> moves = new ArrayList<Play>();
+        moves.add(new Play());
+        moves.add(new Play());
+        return moves;
     }
 
 }

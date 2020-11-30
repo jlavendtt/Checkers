@@ -40,6 +40,11 @@ export class GameService {
       return this.http.post<GameView>(url,play,this.httpOptions);
     }
 
+    getMoves() : Observable<Play> {
+      const url = `${this.gamessUrl}moves`;
+      return this.http.get<Play>(url);
+    }
+
 
 private log(message: string) {
   this.messageService.add(`GameService: ${message}`);

@@ -24,6 +24,12 @@
   .navbar a.active {
     background-color: #4CAF50;
   }
+  .b {
+    background-color: red;
+  }
+  .c {
+    background-color:blue;
+  }
   
   /* Add responsiveness - on screens less than 500px, make the navigation links appear on top of each other, instead of next to each other */
   @media screen and (max-width: 500px) {
