@@ -17,5 +17,9 @@ div {
 }
 
 .available {
-    background-color: purple;
+    background-color: red;
+}
+
+.turn {
+    background-color: lightyellow;
 }

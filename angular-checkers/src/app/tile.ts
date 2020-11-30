@@ -8,6 +8,7 @@ export class Tile  {
     tileColor: TileColor
     row: Coord;
     col: Coord;
+    isTurn: boolean;
 
     constructor(row: Coord, col: Coord, tileColor: TileColor) {
         this.tileColor = tileColor;
@@ -15,6 +16,7 @@ export class Tile  {
         this.col = col;
         this.isSelected = false;
         this.isAvailable = false;
+        this.isTurn = false;
     }
 
     hasPiece() : boolean {

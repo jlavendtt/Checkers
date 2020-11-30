@@ -45,21 +45,27 @@ export class BoardComponent implements OnInit {
 
   loadBoard(gameView: GameView) : void {
 
+    this.makeNotTurn();
     let map = gameView.rep;
     for (let i = 0;i<8;++i) {
       for (let j = 0;j<8;++j) {
         let letter = map[i][j];
+        
         if (letter==="b") {
           this.board.rep[i][j].curPiece = new BlackPawn;
+          if (!gameView.redTurn) this.board.rep[i][j].isTurn = true;
         }
         if (letter === "B") {
           this.board.rep[i][j].curPiece = new BlackKing;
+          if (!gameView.redTurn) this.board.rep[i][j].isTurn = true;
         }
         if (letter === "r") {
           this.board.rep[i][j].curPiece = new redPawn;
+          if (gameView.redTurn) this.board.rep[i][j].isTurn = true;
         }
         if (letter === "R") {
           this.board.rep[i][j].curPiece = new RedKing;
+          if (gameView.redTurn) this.board.rep[i][j].isTurn = true;
         }
         if (letter === "_") {
           this.board.rep[i][j].curPiece = undefined;
@@ -144,6 +150,14 @@ export class BoardComponent implements OnInit {
     for (let i = 0;i<8;++i) {
       for (let j = 0;j<8;++j) {
         this.board.rep[i][j].isAvailable = false;
+      }
+    }
+  }
+
+  makeNotTurn() : void {
+    for (let i = 0;i<8;++i) {
+      for (let j = 0;j<8;++j) {
+        this.board.rep[i][j].isTurn = false;
       }
     }
   }
