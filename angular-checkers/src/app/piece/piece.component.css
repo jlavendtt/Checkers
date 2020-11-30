@@ -1,0 +1,14 @@
+.dot {
+    height: 50px;
+    width: 50px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+  }
+
+  .pawn {
+	width: 80%;
+	height: 80%;
+}

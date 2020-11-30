@@ -17,160 +17,36 @@ export class BlackPawn implements Piece {
 
         let x = pos.col;
         let y = pos.row;
-
         const toReturn: Square[] = [];
-
-        if (x==0 && y ==6) {
-            if (board.rep[y+1][x+1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x+1 as Coord)
-                toReturn.push(temp);
-            }
-        }
-        else if (x==7 && y ==6) {
-            if (board.rep[y+1][x-1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x+1 as Coord)
-                toReturn.push(temp);
-            }
-        }
-        else if (y==6) {
+        
+         //down right
+         if ( (x+1)<8 && (y+1) <8 ) {
             if (board.rep[y+1][x+1].hasNothing()) {
                 let temp = new Square(y+1 as Coord, x+1 as Coord);
-                toReturn.push(temp);
-            }
-            if (board.rep[y+1][x-1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x-1 as Coord);
-
-            }
-        }
-         else if (x==0) {
-            if (board.rep[y+1][x+1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x+1 as Coord);
-                toReturn.push(temp);
-            }
-            if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
-                let temp = new Square(y+2 as Coord, x+2 as Coord);
-                toReturn.push(temp);
-            }
-            
-        }
-        else if (x==7) {
-            if (board.rep[y+1][x-1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x-1 as Coord);
-                toReturn.push(temp);
-            }
-            if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
-                let temp = new Square(y+2 as Coord, x-2 as Coord);
                 toReturn.push(temp);
             }
         }
 
-        else if (x==1) {
-            if (board.rep[y+1][x+1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x+1 as Coord);
-                toReturn.push(temp);
-            }
-            if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
-                let temp = new Square(y+2 as Coord, x+2 as Coord);
-                toReturn.push(temp);
-            }
+        //down left
+        if ( (x-1)>=0 && (y+1) <8) {
             if (board.rep[y+1][x-1].hasNothing()) {
                 let temp = new Square(y+1 as Coord, x-1 as Coord);
                 toReturn.push(temp);
             }
         }
-        else if (x==6) {
-            if (board.rep[y+1][x-1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x-1 as Coord);
-                toReturn.push(temp);
-            }
-            if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
-                let temp = new Square(y+2 as Coord, x-2 as Coord);
-                toReturn.push(temp);
-            }
-            if (board.rep[y+1][x+1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x+1 as Coord);
-                toReturn.push(temp);
-            }
+
+        let jumps = this.potentialJumps(pos,board);
+        for (let i = 0;i<jumps.length;++i) {
+            toReturn.push(jumps[i]);
         }
-        else {
-            if (board.rep[y+1][x+1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x+1 as Coord);
-                toReturn.push(temp);
-            }
-            if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
-                let temp = new Square(y+2 as Coord, x-2 as Coord);
-                toReturn.push(temp);
-            }
-            if (board.rep[y+1][x-1].hasNothing()) {
-                let temp = new Square(y+1 as Coord, x-1 as Coord);
-                toReturn.push(temp);
-            }
-            if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
-                let temp = new Square(y+2 as Coord, x+2 as Coord);
-                toReturn.push(temp);
-            }
-        }
+
         return toReturn;
 
     }
     canJump(pos: Square, board: Board): boolean {
 
-        let x = pos.col;
-        let y = pos.row;
-
-        const toReturn: Square[] = [];
-
-        if (y==7) {
-            return false;
-        }
-
-        else if (x==0 && y ==6) {
-            return false;
-        }
-        else if (x==7 && y ==6) {
-            return false;
-        }
-        else if (y==6) {
-            return false;
-        }
-         else if (x==0) {
-            
-            if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
-                return true;
-            }
-            
-        }
-        else if (x==7) {
-           
-            if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
-                return true;
-            }
-        }
-
-        else if (x==1) {
-           
-            if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
-                return true;
-            }
-            
-        }
-        else if (x==6) {
-            
-            if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
-                return true;
-            }
-            
-        }
-        else {
-            
-            if (board.rep[y+1][x-1].hasRedPiece() && board.rep[y+2][x-2].hasNothing()) {
-                return true;
-            }
-            
-            if (board.rep[y+1][x+1].hasRedPiece() && board.rep[y+2][x+2].hasNothing()) {
-                return true;
-            }
-        }
+        let list = this.potentialJumps(pos,board);
+        if (list.length>0) return true;
         return false;
     }
 
