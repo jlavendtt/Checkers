@@ -1,17 +1,22 @@
-<div *ngIf="tileRep.hasRedKing()"
-style="color:red;">
-    Red King
+<div class="middle"
+*ngIf="tileRep.hasRedKing()">
+<img src="./assets/images/red_king.png" 
+class="king">
 </div>
 <div class = "middle"
 *ngIf="tileRep.hasBlackPawn()">
-    <span class="dot"></span>
+<img src="./assets/images/black.png" 
+class="dot">
 </div>
-<div *ngIf="tileRep.hasBlackKing()">
-    Black King
+<div class="middle"
+*ngIf="tileRep.hasBlackKing()">
+    <img src="./assets/images/black_king.png" 
+    class="king">
 </div>
-<div *ngIf="tileRep.hasRedPawn()"
-style="color:red;">
-    Red Pawn
+<div class = "middle"
+*ngIf="tileRep.hasRedPawn()">
+    <img src="./assets/images/red.png" 
+    class="dot">
 </div>
 <div style="color:white"
 *ngIf="tileRep.hasNothing()">
