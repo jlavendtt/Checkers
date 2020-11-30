@@ -1,3 +1,7 @@
+<h1 style="align-self: center; text-align: center;"
+*ngIf="won">
+{{won}} is the winner!
+</h1>
 
 <div class="board" *ngFor="let row of board.rep">
      <app-tile *ngFor ="let space of row" 

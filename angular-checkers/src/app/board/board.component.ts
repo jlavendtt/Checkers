@@ -28,6 +28,7 @@ export class BoardComponent implements OnInit {
   redTurn: boolean;
   moveid: number;
   mustCapture: boolean;
+  won: string;
 
   constructor(private gameService : GameService) { }
 
@@ -43,7 +44,29 @@ export class BoardComponent implements OnInit {
        );
   }
 
+  checkWinner(gameView: GameView) : void {
+    let bCount = 0;
+    let rCount = 0;
+    for (let i = 0;i<8;++i) {
+      for (let j = 0;j<8;++j ) {
+          if (gameView.rep[i][j] === "b" || gameView.rep[i][j] === "B") bCount++;
+          if (gameView.rep[i][j] === "r" || gameView.rep[i][j] === "R" ) rCount++;
+      }
+    }
+    if (bCount===0) {
+      console.log("red should have won");
+      this.won = "Red";
+    }
+    if (rCount===0) {
+      console.log("black should have won");
+      this.won = "Black";
+    }
+  }
+
   loadBoard(gameView: GameView) : void {
+
+    //check for winner
+    this.checkWinner(gameView);
 
     this.makeNotTurn();
     let map = gameView.rep;
