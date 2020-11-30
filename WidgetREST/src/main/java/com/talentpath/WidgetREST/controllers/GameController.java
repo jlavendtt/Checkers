@@ -31,12 +31,17 @@ public class GameController {
 
     }
 
-    @GetMapping("/moves/{gameId}")
-    public List<Play> getGame(@PathVariable Integer gameId)  {
+    @GetMapping("moves/{gameId}")
+    public List<Play> getMoves(@PathVariable Integer gameId)  {
         List<Play> moves = new ArrayList<Play>();
         moves.add(new Play());
         moves.add(new Play());
         return moves;
+    }
+
+    @GetMapping("game/{gameId}")
+    public GameView getGame(@PathVariable Integer gameId)  {
+        return service.getGameViewById(gameId);
     }
 
 }

@@ -45,6 +45,11 @@ export class GameService {
       return this.http.get<Play>(url);
     }
 
+    loadGame(id : number) : Observable<GameView> {
+    
+      return this.http.get<GameView>(this.gamessUrl+"game/"+id);
+    }
+
 
 private log(message: string) {
   this.messageService.add(`GameService: ${message}`);

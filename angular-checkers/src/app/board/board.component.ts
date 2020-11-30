@@ -11,6 +11,7 @@ import { Square } from '../square';
 import { GameService } from '../game.service';
 import {GameView} from '../gameView';
 import {Play} from '../play';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -30,16 +31,21 @@ export class BoardComponent implements OnInit {
   mustCapture: boolean;
   won: string;
 
-  constructor(private gameService : GameService) { }
+  constructor(private gameService : GameService,
+    private route : ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => 
+    this.gameNum = + params.get("id"))
     this.mustCapture = false;
     this.moveid = 1;
     this.redTurn = true;
     this.makeBoard();
-     this.gameService.startGame().subscribe(game =>   {
+     this.gameService.loadGame(this.gameNum).subscribe(game =>   {
        this.loadBoard(game);
        this.gameNum = game.id;
+       this.moveid = game.moveNum;
+       this.redTurn = game.redTurn;
        }
        );
   }
@@ -69,6 +75,7 @@ export class BoardComponent implements OnInit {
     this.checkWinner(gameView);
 
     this.makeNotTurn();
+    this.moveid = gameView.moveNum;
     let map = gameView.rep;
     for (let i = 0;i<8;++i) {
       for (let j = 0;j<8;++j) {

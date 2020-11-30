@@ -51,9 +51,29 @@ public class GameService {
 
     public GameView move(Play userMove) {
         addMove(userMove);
-        GameView view = new GameView(userMove.getGameNum());
-        List<Move> moves = getMoves(userMove.getGameNum());
+        return getGameViewById(userMove.getGameNum());
+
+    }
+
+    public List<Move> getMoves(Integer id) {
+        List<Move> moves = moveDao.findByGameNumId(id);
+        return moves;
+    }
+
+    public List<GameView> getAllGames() {
+        List<GameView> list = new ArrayList<GameView>();
+        List<Game> games = gameDao.findAll();
+        for (int i = 0;i<games.size();++i) {
+            list.add(new GameView(games.get(i).getId()));
+        }
+        return list;
+    }
+
+    public GameView getGameViewById(Integer gameId) {
+        GameView view = new GameView(gameId);
+        List<Move> moves = getMoves(gameId);
         for (int i = 0; i< moves.size(); ++i) {
+            view.setMoveNum(view.getMoveNum()+1);
             Move move = moves.get(i);
             if (move.isTurnOver()) view.setRedTurn(!view.isRedTurn());
             int start = move.getStartPos();
@@ -79,19 +99,5 @@ public class GameService {
             }
         }
         return view;
-    }
-
-    public List<Move> getMoves(Integer id) {
-        List<Move> moves = moveDao.findByGameNumId(id);
-        return moves;
-    }
-
-    public List<GameView> getAllGames() {
-        List<GameView> list = new ArrayList<GameView>();
-        List<Game> games = gameDao.findAll();
-        for (int i = 0;i<games.size();++i) {
-            list.add(new GameView(games.get(i).getId()));
-        }
-        return list;
     }
 }

@@ -26,6 +26,7 @@ export class LibraryComponent implements OnInit {
       this.games = games;
       if (this.games.length>5) this.games = this.games.slice(this.games.length-5);
       console.log(this.games);
+  
     }
       );
   }

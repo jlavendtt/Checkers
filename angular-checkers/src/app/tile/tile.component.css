@@ -10,8 +10,8 @@
 
 div {
   display: flex;
-  width: 9vw;
-  height: 5.85vw;
+  width: 5.5vw;
+  height: 5.5vw;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
