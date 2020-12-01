@@ -6,7 +6,6 @@ import com.talentpath.WidgetREST.daos.GameRepository;
 import com.talentpath.WidgetREST.daos.MoveRepository;
 import com.talentpath.WidgetREST.models.Game;
 import com.talentpath.WidgetREST.models.Move;
-import com.talentpath.WidgetREST.models.MoveId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -109,5 +108,10 @@ public class GameService {
             Move move = moves.get(moves.size()-1);
             moveDao.delete(move);
         }
+    }
+
+    public List<String> getPlays(Integer gameId) {
+        String[] messag;
+        return null;
     }
 }

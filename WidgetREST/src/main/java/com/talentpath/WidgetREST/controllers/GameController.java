@@ -3,6 +3,7 @@ package com.talentpath.WidgetREST.controllers;
 
 import com.talentpath.WidgetREST.ViewModels.GameView;
 import com.talentpath.WidgetREST.ViewModels.Play;
+import com.talentpath.WidgetREST.models.Move;
 import com.talentpath.WidgetREST.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,11 +34,8 @@ public class GameController {
     }
 
     @GetMapping("moves/{gameId}")
-    public List<Play> getMoves(@PathVariable Integer gameId)  {
-        List<Play> moves = new ArrayList<Play>();
-        moves.add(new Play());
-        moves.add(new Play());
-        return moves;
+    public List<String> getMoves(@PathVariable Integer gameId)  {
+        return service.getPlays(gameId);
     }
 
     @GetMapping("game/{gameId}")

@@ -59,6 +59,7 @@ export class BoardComponent implements OnInit {
         this.gameNum = game.id;
         this.moveid = game.moveNum;
         this.redTurn = game.redTurn;
+        this.mustCapture = game.didCapture;
         }
         );
     });
