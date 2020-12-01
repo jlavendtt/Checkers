@@ -2,7 +2,9 @@
 *ngIf="won">
 {{won}} is the winner!
 </h1>
-
+<div class="wrapper">
+<button class="button" (click)="rewind()">Rewind</button>
+</div>
 <div class="board" *ngFor="let row of board.rep">
      <app-tile *ngFor ="let space of row" 
      (click)="onSelect(space)"

@@ -102,4 +102,12 @@ public class GameService {
         }
         return view;
     }
+
+    public void deleteLastMove(Integer gameId) {
+        List<Move> moves = getMoves(gameId);
+        if (moves.size()>0) {
+            Move move = moves.get(moves.size()-1);
+            moveDao.delete(move);
+        }
+    }
 }

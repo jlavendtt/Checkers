@@ -49,6 +49,21 @@ export class BoardComponent implements OnInit {
        }
        );
   }
+  rewind() {
+    this.makeUnavailable();
+    this.makeNotSelected();
+    this.selectedTile = null;
+    this.gameService.rewind(this.gameNum).subscribe(data => {
+      this.gameService.loadGame(this.gameNum).subscribe(game =>   {
+        this.loadBoard(game);
+        this.gameNum = game.id;
+        this.moveid = game.moveNum;
+        this.redTurn = game.redTurn;
+        }
+        );
+    });
+    
+  }
 
   checkWinner(gameView: GameView) : void {
     let bCount = 0;
@@ -198,6 +213,14 @@ export class BoardComponent implements OnInit {
     for (let i = 0;i<8;++i) {
       for (let j = 0;j<8;++j) {
         this.board.rep[i][j].isTurn = false;
+      }
+    }
+  }
+
+  makeNotSelected() : void {
+    for (let i = 0;i<8;++i) {
+      for (let j = 0;j<8;++j) {
+        this.board.rep[i][j].isSelected = false;
       }
     }
   }

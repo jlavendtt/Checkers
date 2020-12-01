@@ -49,6 +49,10 @@ export class GameService {
     
       return this.http.get<GameView>(this.gamessUrl+"game/"+id);
     }
+    rewind(id : number) : Observable<number> {
+      return this.http.delete<number>(this.gamessUrl+"rewind/"+id)
+      
+    }
 
 
 private log(message: string) {

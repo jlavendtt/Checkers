@@ -7,6 +7,7 @@ import com.talentpath.WidgetREST.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin
@@ -42,6 +43,13 @@ public class GameController {
     @GetMapping("game/{gameId}")
     public GameView getGame(@PathVariable Integer gameId)  {
         return service.getGameViewById(gameId);
+    }
+
+    @DeleteMapping("rewind/{gameId}")
+    public Integer rewind(@PathVariable Integer gameId) {
+        service.deleteLastMove(gameId);
+        return gameId;
+
     }
 
 }
