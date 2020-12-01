@@ -3,4 +3,6 @@ export interface GameView {
     rep: String[][];
     redTurn: boolean;
     moveNum: number;
+    didCapture: boolean;
+    capSpot: number;
 }
