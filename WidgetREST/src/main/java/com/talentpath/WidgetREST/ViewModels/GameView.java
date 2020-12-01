@@ -7,6 +7,8 @@ public class GameView {
     private String[][] rep;
     private boolean redTurn;
     private Integer moveNum;
+    private boolean didCapture;
+    private Integer capSpot;
 
     @Override
     public boolean equals(Object o) {
@@ -16,9 +18,11 @@ public class GameView {
         GameView gameView = (GameView) o;
 
         if (redTurn != gameView.redTurn) return false;
+        if (didCapture != gameView.didCapture) return false;
         if (id != null ? !id.equals(gameView.id) : gameView.id != null) return false;
         if (!Arrays.deepEquals(rep, gameView.rep)) return false;
-        return moveNum != null ? moveNum.equals(gameView.moveNum) : gameView.moveNum == null;
+        if (moveNum != null ? !moveNum.equals(gameView.moveNum) : gameView.moveNum != null) return false;
+        return capSpot != null ? capSpot.equals(gameView.capSpot) : gameView.capSpot == null;
     }
 
     @Override
@@ -27,7 +31,25 @@ public class GameView {
         result = 31 * result + Arrays.deepHashCode(rep);
         result = 31 * result + (redTurn ? 1 : 0);
         result = 31 * result + (moveNum != null ? moveNum.hashCode() : 0);
+        result = 31 * result + (didCapture ? 1 : 0);
+        result = 31 * result + (capSpot != null ? capSpot.hashCode() : 0);
         return result;
+    }
+
+    public boolean isDidCapture() {
+        return didCapture;
+    }
+
+    public void setDidCapture(boolean didCapture) {
+        this.didCapture = didCapture;
+    }
+
+    public Integer getCapSpot() {
+        return capSpot;
+    }
+
+    public void setCapSpot(Integer capSpot) {
+        this.capSpot = capSpot;
     }
 
     public Integer getMoveNum() {
@@ -49,6 +71,8 @@ public class GameView {
         this.rep = rep;
         this.redTurn = redTurn;
         this.moveNum = moveNum;
+        this.didCapture = false;
+        this.capSpot = 0;
     }
 
     public GameView(int gameNum) {
@@ -56,6 +80,8 @@ public class GameView {
         setUp();
         redTurn = true;
         moveNum = 1;
+        this.didCapture = false;
+        this.capSpot = 0;
     }
 
     public void  setUp() {

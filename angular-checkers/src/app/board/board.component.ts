@@ -102,6 +102,16 @@ export class BoardComponent implements OnInit {
         }
       }
     }
+    if (gameView.didCapture) {
+      this.mustCapture = true;
+      let tempi = Math.floor(gameView.capSpot/8);
+      let tempj = gameView.capSpot%8;
+      this.makeUnavailable();
+      this.makeNotTurn();
+      this.board.rep[tempi][tempj].isSelected = true;
+      this.makeAvailable(this.board.rep[tempi][tempj].curPiece.potentialJumps(new Square(tempi as Coord, tempj as Coord),this.board));
+      this.selectedTile = this.board.rep[tempi][tempj];
+    }
 
   }
 

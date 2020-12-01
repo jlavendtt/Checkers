@@ -75,6 +75,8 @@ public class GameService {
         for (int i = 0; i< moves.size(); ++i) {
             view.setMoveNum(view.getMoveNum()+1);
             Move move = moves.get(i);
+            view.setDidCapture(!move.isTurnOver());
+            view.setCapSpot(move.getEndPos());
             if (move.isTurnOver()) view.setRedTurn(!view.isRedTurn());
             int start = move.getStartPos();
             int starti = start/8;
