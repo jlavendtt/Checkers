@@ -1,6 +1,14 @@
+<br>
+<br>
 <div class="wrap" *ngFor="let game of games">
     <a [routerLink]="['/board',game.id]"> 
         Game number {{game.id}}
     </a>
+    <app-boardrep
+    [gameIdInput]="game.id">>
+    </app-boardrep>
+    <br>
+    <br>
+    <br>
     
 </div>

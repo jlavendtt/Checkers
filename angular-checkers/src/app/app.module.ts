@@ -15,6 +15,7 @@ import { TileComponent } from './tile/tile.component';
 import { PieceComponent } from './piece/piece.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LibraryComponent } from './library/library.component';
+import { BoardrepComponent } from './boardrep/boardrep.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LibraryComponent } from './library/library.component';
     TileComponent,
     PieceComponent,
     DashboardComponent,
-    LibraryComponent
+    LibraryComponent,
+    BoardrepComponent
   ],
   imports: [
     BrowserModule,
