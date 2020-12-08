@@ -1,5 +1,6 @@
 package com.talentpath.WidgetREST.services;
 
+import com.talentpath.WidgetREST.ViewModels.Play;
 import com.talentpath.WidgetREST.daos.GameRepository;
 import com.talentpath.WidgetREST.daos.MoveRepository;
 import com.talentpath.WidgetREST.daos.TestDao;
@@ -20,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles( "production" )
 class GameServiceTest {
-    TestDao testDao = new TestDao();
 
     @Autowired
     GameService service;
@@ -28,22 +28,22 @@ class GameServiceTest {
     @Autowired
     MoveRepository moveRepo;
 
-//    @Test
-//    void startGame() {
-//    }
-//    @Test
-//    void getMoves() {
-//        List<Move> moves = service.getMoves(1);
-//        int i = 0;
-//    }
+    @Autowired
+    GameRepository gameRepo;
 
-//    @Test
-//    void getGame() {
-//        Game game = service.getGameById(3);
-//        int i = 0;
-//
-//
-//    }
+    @Test
+    void addGame() {
+        Game game = new Game();
+        gameRepo.saveAndFlush(game);
+    }
+
+    @Test
+    void getMoves() {
+        List<Move> moves = service.getMoves(1);
+        int i = 0;
+    }
+
+
     @Test
     void addMove() {
         Move move = new Move();
@@ -57,6 +57,9 @@ class GameServiceTest {
     }
     @Test
     void findMovesById() {
+        Play play = new Play();
+        play.setGameNum(1);
+        service.addMove(play);
         List<Move> list = moveRepo.findByGameNumId(1);
         assertEquals(1,list.size());
     }
