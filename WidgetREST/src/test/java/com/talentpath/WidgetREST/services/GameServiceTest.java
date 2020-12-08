@@ -1,5 +1,6 @@
 package com.talentpath.WidgetREST.services;
 
+import com.talentpath.WidgetREST.ViewModels.GameView;
 import com.talentpath.WidgetREST.ViewModels.Play;
 import com.talentpath.WidgetREST.daos.GameRepository;
 import com.talentpath.WidgetREST.daos.MoveRepository;
@@ -38,29 +39,47 @@ class GameServiceTest {
     }
 
     @Test
-    void getMoves() {
-        List<Move> moves = service.getMoves(1);
-        int i = 0;
-    }
-
-
-    @Test
     void addMove() {
-        Move move = new Move();
-        move.setTurnOver(true);
-        move.setStartPos(12);
-        move.setEndPos(14);
-        move.setMoveNum(99);
-        move.setGameNum(new Game(1,null,null));
-        moveRepo.saveAndFlush(move);
-        int i = 0;
+
+        Game game = new Game();
+        game = gameRepo.saveAndFlush(game);
+        Play play = new Play();
+        play.setGameNum(game.getId());
+        service.addMove(play);
+
     }
     @Test
     void findMovesById() {
+        Game game = new Game();
+        game = gameRepo.saveAndFlush(game);
+        int id = game.getId();
         Play play = new Play();
-        play.setGameNum(1);
+        play.setGameNum(id);
         service.addMove(play);
-        List<Move> list = moveRepo.findByGameNumId(1);
+        List<Move> list = moveRepo.findByGameNumId(id);
         assertEquals(1,list.size());
     }
+    @Test
+    void deleteLastWord() {
+        Game game = new Game();
+        game = gameRepo.saveAndFlush(game);
+        int id = game.getId();
+        Play play = new Play();
+        play.setGameNum(id);
+        service.addMove(play);
+        service.deleteLastMove(id);
+        List<Move> moves = service.getMoves(id);
+        assertEquals(0,moves.size());
+
+    }
+    @Test
+    void getGameViewById() {
+        Game game = new Game();
+        game = gameRepo.saveAndFlush(game);
+        int id = game.getId();
+        GameView view = service.getGameViewById(id);
+        assertEquals(view.getRep(),new GameView().getRep());
+
+    }
+
 }
