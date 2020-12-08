@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 //@Configuration      //tells Spring that this is to be used once for config
 @EnableWebSecurity
@@ -80,7 +81,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( HttpMethod.DELETE, "/api/games/rewind/**").permitAll()
 
 
-                .anyRequest().authenticated();
+                .anyRequest().authenticated().and()
+        .addFilterBefore(new AuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
 
